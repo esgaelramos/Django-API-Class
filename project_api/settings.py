@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'myapi',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,23 @@ WSGI_APPLICATION = 'project_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #FOR MYSQL
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'HOST': 'localhost',
+        # 'PORT': '3306',
+        # 'USER': 'root',
+        # 'PASSWORD': '',
+        # 'NAME': 'django_api',
+        # 'OPTIONS': {
+        #     'init_commmand':"SET sql=mode='STRICT_TRANS_TABLES'"        
+        # } 
+        #FOR PSQL
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'django_api',
+        'USER': 'postgres',
+        'PASSWORD': 'SEXYpsql!88',
+        'HOST': '127.0.0.1',
+        'DATABASE_PORT': '5432',
     }
 }
 
@@ -103,9 +119,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-mx'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 
