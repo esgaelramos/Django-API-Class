@@ -2,12 +2,18 @@
 from django.views import View
 from .models import Company
 from django.http.response import JsonResponse
-
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+import json
 # Create your views here.
 
 #Existen VIEWS about CLASS and about FUNCTIONS;
 
 class CompanyView(View):
+    
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
     
     def get(self, request):
         # companies = Company.objects.all()
@@ -25,7 +31,15 @@ class CompanyView(View):
     
     
     def post(self, request):
-        pass
+        # print(request.body)
+        jd = json.loads(request.body)
+        # print(jd)
+        Company.objects.create(name=jd['name'], website=jd['website'], foundation=jd['foundation'])
+        data = {
+            'message': 'Success',
+        }
+        return JsonResponse(data)
+        
 
     def put(self, request):
         pass

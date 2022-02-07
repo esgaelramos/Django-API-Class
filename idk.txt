@@ -1,0 +1,24 @@
+INSTALL EXTENSION: THUNDER CLIENT
+ADD COLLECTION
+CREATE NEW REQUEST (SELECT URL AND SEND): WITH THIS, YOU CAN CHECK THE FORMAT JSON
+---
+WHEN YOU DO THE POST REQUEST
+HAS FORBIDDEN FOR CSRF
+//AND IF WE PLAY WITHOUT FRAMEWORKS NEED TO DISABLE:) =>
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+AND ADD
+import json
+        jd = json.loads(request.body)
+        print(jd)
+---
+FOR SEND, USE DOUBLE QUOTES ""
+{
+    "name": "Twiiter",
+    "website": "https://twiiter.com",
+    "foundation": 2006
+}
