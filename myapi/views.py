@@ -15,19 +15,33 @@ class CompanyView(View):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
     
-    def get(self, request):
-        # companies = Company.objects.all()
-        companies = list(Company.objects.values())
-        if len(companies) > 0:
-            data = {
-                'message': 'Success',
-                'companies': companies,
-            }
+    def get(self, request, id=0):
+        if (id>0):
+            companies = list(Company.objects.filter(id=id).values())
+            if len(companies) > 0:
+                company = companies[0]
+                data = {
+                    'message': 'Success',
+                    'companies': company,
+                }
+            else:
+                data = {
+                    'message': 'Error: Companies not found...'
+                }
+            return JsonResponse(data)
         else:
-            data = {
-                'message': 'Error: Companies not found...'
-            }
-        return JsonResponse(data)
+            # companies = Company.objects.all()
+            companies = list(Company.objects.values())
+            if len(companies) > 0:
+                data = {
+                    'message': 'Success',
+                    'companies': companies,
+                }
+            else:
+                data = {
+                    'message': 'Error: Companies not found...'
+                }
+            return JsonResponse(data)
     
     
     def post(self, request):
